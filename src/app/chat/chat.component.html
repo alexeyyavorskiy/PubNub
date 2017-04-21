@@ -1,0 +1,20 @@
+<div class="container">
+  <br>
+  <div *ngIf="!show">
+    <form class="form-horizontal" role="form" (ngSubmit)="setUserAndConnect()">
+      <input placeholder="Enter your name" name="userName" type="text" [(ngModel)]="userName"/>
+      <button class="btn btn-primary">Apply</button>
+    </form>
+  </div>
+  <div *ngIf="show">
+    <span>Your name is: <b>{{userName}}</b></span>
+    <form class="form-horizontal" role="form" (ngSubmit)="publish()">
+      <input placeholder="Enter new message" type="text" name="newMessage" [(ngModel)]="newMessage" (change)="onChange()"/>
+      <button class="btn btn-primary">Push</button>
+    </form>
+    <br/>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of messages">{{ item.message.text }}</li>
+    </ul>
+  </div>
+</div>
