@@ -9,7 +9,7 @@
   <div *ngIf="show">
     <span>Your name is: <b>{{userName}}</b></span>
     <form class="form-horizontal" role="form" (ngSubmit)="publish()">
-      <input placeholder="Enter new message" type="text" name="newMessage" [(ngModel)]="newMessage" (change)="onChange()"/>
+      <input placeholder="Enter new message" type="text" name="newMessage" [(ngModel)]="newMessage"/>
       <button class="btn btn-primary">Push</button>
     </form>
     <br/>

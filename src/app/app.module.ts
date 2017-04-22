@@ -12,7 +12,6 @@ import {Ng2Webstorage} from "ng2-webstorage";
 import {HttpModule} from "@angular/http";
 import {ModalModule} from 'angular2-modal';
 import {BootstrapModalModule} from 'angular2-modal/plugins/bootstrap';
-import {LoginComponent} from "./login/login.component";
 import {uiRouterConfigFn} from "./router.config";
 import {GlobalService} from "./services/global.service";
 import {TestComponent} from "./test.component";
@@ -49,7 +48,6 @@ import {PubNub} from 'pubnub';
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent,
         MapComponent,
         ChatComponent,
         TestComponent,
