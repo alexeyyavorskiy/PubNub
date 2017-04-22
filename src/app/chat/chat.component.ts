@@ -1,6 +1,9 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
 import {PubNubAngular} from "pubnub-angular2";
 import {EmitterService} from "../services/emitter.service";
+import {Http, Response} from "@angular/http";
+import {publish} from "rxjs/operator/publish";
+import {GeolocationService} from "../services/geolocation.service";
 
 @Component({
   selector: 'chat',
@@ -18,9 +21,9 @@ export class ChatComponent implements OnInit {
   private lng: number;
   private show: boolean = false;
 
-  constructor(private pubnubService: PubNubAngular, private emitterService: EmitterService) {
+  constructor(private pubnubService: PubNubAngular, private emitterService: EmitterService, private geoService: GeolocationService) {
 
-    this.channel = 'my_channel2';
+    this.channel = 'my_channel3';
     this.messages = [];
     this.addOnMap = this.emitterService.get('add_on_map');
     this.showUserPos = this.emitterService.get('show_user_pos');
@@ -48,12 +51,21 @@ export class ChatComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-        // this.lat = ChatComponent.getRandomInt(0, 90);
-        // this.lng = ChatComponent.getRandomInt(-90, 90);
         console.log("geolocation is %s : %s", this.lat, this.lng);
+      }, () => {
+        console.log("Your browser does not support geolocation. IP geolocation will be used instead!");
+        this.geoService.getLocationByIp().then((data) => {
+          if (data) {
+            let latLng = data.loc.split(',');
+            this.lat = latLng[0];
+            this.lng = latLng[1];
+            console.log("geolocation by ip is %s : %s", this.lat, this.lng);
+          }
+        }, () => console.log("Error on getting location by IP"))
       });
     }
   }
+
 
   private publish(): void {
     if (this.newMessage !== '') {

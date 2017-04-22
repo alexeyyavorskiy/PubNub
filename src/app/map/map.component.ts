@@ -20,14 +20,14 @@ export class MapComponent implements OnInit {
     this.shownOnMapSubscription = this.emitterService.get('add_on_map')
       .subscribe((event) => {
         let marker = this.markers.get(event.id);
-        marker ?  this.setMarkerAnimation(marker) : this.setMarker(event.id, event.lat, event.lng);
+        marker ? this.setMarkerAnimation(marker) : this.setMarker(event.id, event.lat, event.lng);
       });
     this.showUserPosSubscription = this.emitterService.get('show_user_pos')
       .subscribe((event) => this.setUserPosition(event.lat, event.lng))
   }
 
   ngOnInit() {
-    this.zoom = 4;
+    this.zoom = 2;
   }
 
   private setUserPosition(lat: number, lng: number) {
@@ -38,7 +38,13 @@ export class MapComponent implements OnInit {
 
   private initialize() {
     this.map = new google.maps.Map(document.getElementById('map-canvas'));
-    let latLng = new google.maps.LatLng(this.latitude, this.longitude);
+    let latLng;
+    if (this.latitude && this.longitude) {
+      latLng = new google.maps.LatLng(this.latitude, this.longitude);
+    } else {
+      latLng = new google.maps.LatLng(50, 50);
+      console.log("Used default geoPosition");
+    }
     this.map.setCenter(latLng);
     this.map.setZoom(this.zoom);
   };

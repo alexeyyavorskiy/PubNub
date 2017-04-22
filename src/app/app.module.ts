@@ -22,6 +22,7 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {EmitterService} from "./services/emitter.service";
 import {PubNubAngular} from 'pubnub-angular2';
 import {PubNub} from 'pubnub';
+import {GeolocationService} from "./services/geolocation.service";
 
 @NgModule({
     imports: [
@@ -53,7 +54,7 @@ import {PubNub} from 'pubnub';
         TestComponent,
     ],
     bootstrap: [AppComponent],
-    providers: [GlobalService, EmitterService, PubNubAngular],
+    providers: [GlobalService, GeolocationService, EmitterService, PubNubAngular],
     entryComponents: []
 })
 export class AppModule {
