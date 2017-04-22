@@ -10,6 +10,6 @@ export function uiRouterConfigFn(router: UIRouter, injector: Injector) {
 
 
   // If no URL matches, go to the `login` state by default
-  router.urlService.rules.otherwise({state: 'home'});
+  router.urlService.rules.otherwise({state: '/'});
 
 }

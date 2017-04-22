@@ -3,7 +3,7 @@ import {HomeComponent} from "./home/home.component";
 
 export let MAIN_STATES: Ng2StateDeclaration[] = [
   {
-    name: 'home', url: '/home',
+    name: 'home', url: '/',
     params: {modal: ''},
     component: HomeComponent
   }
